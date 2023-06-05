@@ -9,7 +9,7 @@ internal static class HostingExtensions
     {
         // uncomment if you want to add a UI
         builder.Services.AddRazorPages();
-        builder.Services.AddConfigurationIdentityServer();
+        builder.Services.AddConfigurationIdentityServer(builder.Configuration);
         builder.Services.AddConfigurationCors();
         return builder.Build();
     }

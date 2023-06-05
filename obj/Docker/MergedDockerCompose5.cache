@@ -1,0 +1,46 @@
+services:
+  shopidenitydb:
+    container_name: shopidenitydb
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Passw0rd!
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+    - published: 1436
+      target: 1433
+    restart: always
+    volumes:
+    - shop_identity_sqlserver_data:/var/opt/mssql:rw
+  shoponline.idp:
+    build:
+      context: D:\Source\Microservices\ShopOnline.IDP
+      dockerfile: Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: ShopOnline.IDP
+      target: base
+    container_name: ShopOnline.IDP
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: shoponlineidp:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  ""'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    tty: true
+    volumes:
+    - D:\Source\Microservices\ShopOnline.IDP:/app:rw
+    - C:\Users\HungDangHong\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\HungDangHong\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\HungDangHong\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\HungDangHong\.nuget\packages:/root/.nuget/packages:ro
+    - D:\Source\Microservices\ShopOnline.IDP:/src:rw
+version: '3.4'
+volumes:
+  shop_identity_sqlserver_data:
+    external: false

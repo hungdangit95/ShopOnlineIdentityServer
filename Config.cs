@@ -66,7 +66,39 @@ public static class Config
                         "shoponline_microservices_api.read",
                         "shoponline_microservices_api.write",
                     }
-                }
+                },
+                new()
+                {
+                    ClientName = "ShopOnline Microservice Postman",
+                    AccessTokenLifetime = 60*60*2,
+                    RequireConsent = false,
+                    AllowedGrantTypes = new []{GrantType.ClientCredentials},
+                    ClientId = "shoponline_microservice_postman",
+                    RedirectUris = new List<string>
+                    {
+                        "http://localhost:5001/swagger/oauth2-redirect.html"
+                    },
+                    Enabled = true,
+                    ClientUri = null,
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "http://localhost:5001/swagger/oauth2-redirect.html"
+                    },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        "shoponline_microservices_api.read",
+                        "shoponline_microservices_api.write",
+                    },
+                    AllowOfflineAccess = true,
+                    RequireClientSecret = true,
 
+                    ClientSecrets =  new[]
+                    {
+                        new Secret("SuperStrongSecret".Sha512())
+                    }
+                }
             };
 }

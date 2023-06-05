@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  shopidenitydb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: shopidenitydb
+    environment:
+      SA_PASSWORD: "Passw0rd!"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - shop_identity_sqlserver_data:/var/opt/mssql
+    restart: always
+    ports:
+      - "1436:1433"
+
+  shoponline.idp:
+    image: ${DOCKER_REGISTRY-}shoponlineidp
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+volumes:
+  shop_identity_sqlserver_data:
+    external: false
+  
+  
