@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using ShopOnline.IDP;
 using ShopOnline.IDP.Extensions;
+using ShopOnline.IDP.PersistedDb;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -14,7 +15,8 @@ try
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
-    app.Run();
+    app.MigrateDatabase().
+        Run();
 }
 catch (Exception ex)
 {

@@ -12,15 +12,25 @@ services:
     restart: always
     ports:
       - "1436:1433"
+    networks:
+      - shop_microservices_identity
 
   shoponline.idp:
     image: ${DOCKER_REGISTRY-}shoponlineidp
     build:
       context: .
       dockerfile: Dockerfile
+    networks:
+      - shop_microservices_identity
 
 volumes:
   shop_identity_sqlserver_data:
     external: false
+#network section
+networks:
+  shop_microservices_identity:
+    driver: bridge
+    external: true
+
   
   
