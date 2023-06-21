@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ShopOnline.IDP.Entities;
+using ShopOnline.IDP.PersistedDb;
 
 namespace ShopOnline.IDP.Extensions
 {
@@ -28,7 +31,9 @@ namespace ShopOnline.IDP.Extensions
             AddOperationalStore(cfg =>
             {
                 cfg.ConfigureDbContext = c => c.UseSqlServer(conectionString, builder => builder.MigrationsAssembly("ShopOnline.IDP"));
-            });
+            })
+            .AddAspNetIdentity<User>();
+
             return services;
         }
 
@@ -44,6 +49,30 @@ namespace ShopOnline.IDP.Extensions
                 });
             });
             return services;
+        }
+
+        public static void ConfigureIdentity(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectString = configuration.GetConnectionString("IdentitySqlConnection");
+            services.AddDbContext<ShopOnlineIdentityContext>(options =>
+                options.UseSqlServer(connectString)
+            ).AddIdentity<User, IdentityRole>(
+                opt =>
+                {
+                    opt.Password.RequireDigit = false;
+                    opt.Password.RequiredLength = 6;
+                    opt.Password.RequireUppercase = false;
+                    opt.Password.RequireLowercase = false;
+                    opt.User.RequireUniqueEmail = true;
+                    opt.Lockout.AllowedForNewUsers = true;
+                    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    opt.Lockout.MaxFailedAccessAttempts = 3;
+
+                }
+            )
+            .AddEntityFrameworkStores<ShopOnlineIdentityContext>()
+             .AddDefaultTokenProviders()
+            ;
         }
     }
 }
