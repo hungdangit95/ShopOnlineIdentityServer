@@ -32,7 +32,9 @@ namespace ShopOnline.IDP.Extensions
             {
                 cfg.ConfigureDbContext = c => c.UseSqlServer(conectionString, builder => builder.MigrationsAssembly("ShopOnline.IDP"));
             })
-            .AddAspNetIdentity<User>();
+            .AddAspNetIdentity<User>()
+            .AddProfileService<IdentityProfileService>()
+            ;
 
             return services;
         }

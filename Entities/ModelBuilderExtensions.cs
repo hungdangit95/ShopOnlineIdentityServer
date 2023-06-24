@@ -82,7 +82,7 @@ namespace ShopOnline.IDP.Entities
         private static void ConfigureUserRole(EntityTypeBuilder<IdentityUserRole<string>> entity)
         {
             entity.ToTable("UserRoles", SystemConstants.IdentitySchema)
-              .HasKey(x => new {x.UserId});
+              .HasKey(x => new {x.UserId, x.RoleId});
         }
 
         private static void ConfigureUserToken(EntityTypeBuilder<IdentityUserToken<string>> entity)

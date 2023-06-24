@@ -1,5 +1,6 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
+using System.Security.Claims;
 
 namespace ShopOnline.IDP;
 
@@ -13,7 +14,7 @@ public static class Config
             new IdentityResources.Email(),
             new IdentityResource
             {
-                Name = "role",
+                Name = "roles",
                 UserClaims = new List<string>
                 {
                     "role"
@@ -65,14 +66,19 @@ public static class Config
                         IdentityServerConstants.StandardScopes.OpenId,
                         "shoponline_microservices_api.read",
                         "shoponline_microservices_api.write",
-                    }
+                        "roles"
+                    },
+                   Claims = new List<ClientClaim>
+                     {
+                     new ClientClaim("role", "Administrator")
+                     }
                 },
                 new()
                 {
                     ClientName = "ShopOnline Microservice Postman",
                     AccessTokenLifetime = 60*60*2,
                     RequireConsent = false,
-                    AllowedGrantTypes = new []{GrantType.ClientCredentials},
+                    AllowedGrantTypes = new []{GrantType.ClientCredentials, GrantType.ResourceOwnerPassword},
                     ClientId = "shoponline_microservice_postman",
                     RedirectUris = new List<string>
                     {
@@ -91,14 +97,18 @@ public static class Config
                         IdentityServerConstants.StandardScopes.OpenId,
                         "shoponline_microservices_api.read",
                         "shoponline_microservices_api.write",
+                        "roles"
                     },
                     AllowOfflineAccess = true,
                     RequireClientSecret = true,
-
                     ClientSecrets =  new[]
                     {
                         new Secret("SuperStrongSecret".Sha512())
-                    }
+                    },
+                    Claims = new List<ClientClaim>
+                     {
+                     new ClientClaim("role", "Administrator")
+                     }
                 }
             };
 }
