@@ -47,8 +47,6 @@ namespace ShopOnline.IDP.Extensions
             context.IssuedClaims = claims;
         }
 
-        
-
         public async Task IsActiveAsync(IsActiveContext context)
         {
             var subjectId =  context.Subject.GetSubjectId();
