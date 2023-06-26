@@ -1,6 +1,8 @@
 using Serilog;
-using ShopOnline.IDP;
+using ShopOnline.IDP.Common.Domains;
 using ShopOnline.IDP.Extensions;
+using ShopOnline.IDP.Repositories;
+
 namespace ShopOnline.IDP;
 
 internal static class HostingExtensions
@@ -12,6 +14,9 @@ internal static class HostingExtensions
         builder.Services.ConfigureIdentity(builder.Configuration);
         builder.Services.AddConfigurationIdentityServer(builder.Configuration);
         builder.Services.AddConfigurationCors();
+        builder.Services.AddTransient(typeof(IUnitOfWork),typeof(UnitOfWork));
+        builder.Services.AddTransient(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>)))
+        builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
         return builder.Build();
     }
     
