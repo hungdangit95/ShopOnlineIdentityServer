@@ -2,12 +2,12 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using ShopOnline.IDP.Entities;
 
-namespace ShopOnline.IDP.Repositories
+namespace ShopOnline.IDP.Common.Repositories
 {
     public interface IRepositoryManager
     {
-        UserManager<User> UserManager { get; }
-        RoleManager<User> RoleManager { get; }
+        //UserManager<User> UserManager { get; }
+        //RoleManager<User> RoleManager { get; }
         Task<int> SaveAsync();
         Task<IDbContextTransaction> BeginTransactionAsync();
         Task EndTransactionAsync();

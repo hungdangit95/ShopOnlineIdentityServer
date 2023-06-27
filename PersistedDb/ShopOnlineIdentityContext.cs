@@ -9,8 +9,8 @@ namespace ShopOnline.IDP.PersistedDb
     {
         public ShopOnlineIdentityContext(DbContextOptions<ShopOnlineIdentityContext> options):base(options)
         {
-
         }
+        public DbSet<Permission> Permissions { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(typeof(ShopOnlineIdentityContext).Assembly);

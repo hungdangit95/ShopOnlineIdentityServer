@@ -4,25 +4,23 @@ using ShopOnline.IDP.Common.Domains;
 using ShopOnline.IDP.Entities;
 using ShopOnline.IDP.PersistedDb;
 
-namespace ShopOnline.IDP.Repositories
+namespace ShopOnline.IDP.Common.Repositories
 {
     public class RepositoryManager : IRepositoryManager
     {
-        public UserManager<User> UserManager { get; }
-        public RoleManager<User> RoleManager { get; }
+        //public UserManager<User> UserManager { get; }
+        //public RoleManager<User> RoleManager { get; }
         private readonly IUnitOfWork _unitOfWork;
         private readonly ShopOnlineIdentityContext _dbContext;
-        
 
-        public RepositoryManager(IUnitOfWork unitOfWork, 
-            ShopOnlineIdentityContext dbContext, 
-            UserManager<User> userManager,
-            RoleManager<User> roleManager)
+
+        public RepositoryManager(IUnitOfWork unitOfWork,
+            ShopOnlineIdentityContext dbContext)
         {
             _unitOfWork = unitOfWork;
             _dbContext = dbContext;
-            UserManager = userManager;
-            RoleManager = roleManager;
+            //UserManager = userManager;
+            //RoleManager = roleManager;
         }
 
         public Task<IDbContextTransaction> BeginTransactionAsync()
@@ -32,6 +30,6 @@ namespace ShopOnline.IDP.Repositories
 
         public void RollbackTransaction() => _dbContext.Database.RollbackTransactionAsync();
 
-        public Task<int> SaveAsync()=> _unitOfWork.CommitAsync();
+        public Task<int> SaveAsync() => _unitOfWork.CommitAsync();
     }
 }
