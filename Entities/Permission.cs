@@ -15,6 +15,7 @@ namespace ShopOnline.IDP.Entities
         [MaxLength(50)]
         [Column(TypeName = "varchar(50)")]
         public string Command { get; set; }
+        [ForeignKey("RoleId")]
         public string RoleId { get; set; }
         public virtual IdentityRole Role { get; set; }
 

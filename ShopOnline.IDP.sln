@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnline.IDP", "ShopOnlin
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{92FEBCFD-B37E-49F8-8A4D-F5928B5AF343}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnline.IDP.Presentation", "..\ShopOnline.IDP.Presentation\ShopOnline.IDP.Presentation.csproj", "{3CB2EA05-FE10-436D-B9AA-F11D87DF42F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{92FEBCFD-B37E-49F8-8A4D-F5928B5AF343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92FEBCFD-B37E-49F8-8A4D-F5928B5AF343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92FEBCFD-B37E-49F8-8A4D-F5928B5AF343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CB2EA05-FE10-436D-B9AA-F11D87DF42F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CB2EA05-FE10-436D-B9AA-F11D87DF42F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CB2EA05-FE10-436D-B9AA-F11D87DF42F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB2EA05-FE10-436D-B9AA-F11D87DF42F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

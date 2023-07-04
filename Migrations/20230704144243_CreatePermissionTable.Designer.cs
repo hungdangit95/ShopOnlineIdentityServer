@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopOnline.IDP.PersistedDb;
 
@@ -11,9 +12,10 @@ using ShopOnline.IDP.PersistedDb;
 namespace ShopOnline.IDP.Migrations
 {
     [DbContext(typeof(ShopOnlineIdentityContext))]
-    partial class ShopOnlineIdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20230704144243_CreatePermissionTable")]
+    partial class CreatePermissionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,15 +48,15 @@ namespace ShopOnline.IDP.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4c2e725d-6aab-47fd-b860-df8b0af5c886",
-                            ConcurrencyStamp = "ab3f1301-e4cc-491c-a6d3-0cf918dc587d",
+                            Id = "6df77ab9-7ab0-4e99-9678-969fbd25b0a7",
+                            ConcurrencyStamp = "c4ca88c2-0e4c-4e16-908e-75327bc6c896",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "91944640-d01d-4649-a22b-e7b57c53702b",
-                            ConcurrencyStamp = "47431655-7d92-40b2-b224-5bef09290165",
+                            Id = "1c2ec192-99e5-466a-81a0-c31559b96ca1",
+                            ConcurrencyStamp = "db80aed2-abbe-4778-8fa9-613c7af904b9",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
